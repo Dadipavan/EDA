@@ -74,4 +74,4 @@ It enables users to analyze, visualize, and transform their data — performing 
 git clone https://github.com/Dadipavan/EDA.git
 cd DataVista
 pip install -r requirements.txt
-streamlit run eda_app.py
+streamlit run app.py
