@@ -918,6 +918,7 @@ def main():
     """, unsafe_allow_html=True)
     
     # Sidebar
+    st.sidebar.title("🎉DataVistaa")
     st.sidebar.title("📊 EDA Options")
     uploaded_file = st.sidebar.file_uploader(
         "Choose a file", 
