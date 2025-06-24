@@ -11,6 +11,7 @@ from scipy import stats
 from sklearn.preprocessing import LabelEncoder
 import io
 import base64
+import pyarrow as pa
 
 warnings.filterwarnings('ignore')
 
@@ -392,12 +393,17 @@ def feature_engineering(df):
 
     # ✅ Show preview after all operations
     st.markdown("### 👁️ Preview Transformed Data (First 5 Rows)")
-    # Ensure object columns are converted to strings to avoid PyArrow error
     preview_df = st.session_state['engineered_df'].head().copy()
-    for col in preview_df.select_dtypes(include='object').columns:
-        preview_df[col] = preview_df[col].astype(str)
+
+    # Convert all columns to string if needed, not just object-type
+    for col in preview_df.columns:
+        try:
+            _ = pa.array(preview_df[col])
+        except Exception:
+            preview_df[col] = preview_df[col].astype(str)
     
     st.dataframe(preview_df, use_container_width=True)
+
 
 
 
