@@ -944,9 +944,9 @@ def main():
             df = load_data(uploaded_file)
             
             if 'last_uploaded_file_name' not in st.session_state or st.session_state['last_uploaded_file_name'] != uploaded_file.name:
-            st.session_state['last_uploaded_file_name'] = uploaded_file.name
-            if 'engineered_df' in st.session_state:
-                del st.session_state['engineered_df']
+                st.session_state['last_uploaded_file_name'] = uploaded_file.name
+                if 'engineered_df' in st.session_state:
+                    del st.session_state['engineered_df']
 
         
         if df is not None:
