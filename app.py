@@ -392,7 +392,13 @@ def feature_engineering(df):
 
     # ✅ Show preview after all operations
     st.markdown("### 👁️ Preview Transformed Data (First 5 Rows)")
-    st.dataframe(st.session_state['engineered_df'].head(), use_container_width=True)
+    # Ensure object columns are converted to strings to avoid PyArrow error
+    preview_df = st.session_state['engineered_df'].head().copy()
+    for col in preview_df.select_dtypes(include='object').columns:
+        preview_df[col] = preview_df[col].astype(str)
+    
+    st.dataframe(preview_df, use_container_width=True)
+
 
 
     # ✅ Download Button
